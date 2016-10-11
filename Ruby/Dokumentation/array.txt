@@ -1,0 +1,43 @@
+Definition
+	Array ist eine geordnete Liste, die Verweise auf andere Objekte enthält.
+
+Neues Array anlegen
+	seats = []
+	seats = Array.new
+
+	seats = ["wert1", "wert2"]
+	seats = %w(wert1 wert2)
+
+Werte hinzufügen
+	seats << "Wert3"
+	seats[2] = "wert3"
+	seats.push("Wert3")
+
+Methoden von Arrays
+	Array Groesse:
+		seats.size
+	Letztes Element entfernen
+		seats.pop
+	Array leer
+		seats.empty?
+	Löschen von Element
+		seats.delete_at(3)
+
+Iterations-Methoden:
+var = %w(ich u du)
+
+var.each
+	Methode zum durchlaufen der einzelnen Elemente
+
+var.select
+	Methode, die im Block einen boolischen Wert erwartet bei true den Inhalt zurückgibt
+	ret = var.select { |v| v.size > 1 }
+	ret enhält ['ich', 'du']
+
+var.reject
+	Gegenteil von select: die zurückgewiesenen Werte werden gespeichert
+	ret = var.reject { |v| v.size > 1 }
+	ret enthält ['u']
+
+var.sort
+	gibt ein sortiertes Array zurück
