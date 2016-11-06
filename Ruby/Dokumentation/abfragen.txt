@@ -29,7 +29,7 @@ Ternärer Operator:
 	Es gibt die Möglichkeit einen if-else-Block in einer Zeile auszuführen:
 		puts car.typ == "" ? "Kein Wert" : car.typ
 
-	Die Anweisung puts, also erzeuge eine Ausgabe, bekommt den Wert "Kein Wert" falls die Bedingung 'car.typ.empty?' leer ist; bzw. den aktuellen Objekt-Wert für 'typ' falls dieser gefüllt ist.
+	Die Anweisung puts, also erzeuge eine Ausgabe, bekommt den Wert 'Kein Wert' falls die Bedingung 'car.typ == ""' leer ist; bzw. den aktuellen Objekt-Wert für 'typ' falls dieser gefüllt ist.
 
 	Das Fragezeichen ist ein Operator der die linksstehende Bedingung von den auszuführenden Anweisungen trennt.
 	Der Doppelpunkt fungiert als Kurzform von 'else'
