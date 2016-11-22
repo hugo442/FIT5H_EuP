@@ -20,7 +20,7 @@ Prinzip WVC
 
 Verwalten der Module
 	Eine Railsapplikation besteht im Hintergrund aus einer Vielzahl von Modulen, die gems genannt werden.
-	Diese MOdule sind in der Datei Gemfile eines Projektes organisiert.
+	Diese Module sind in der Datei Gemfile eines Projektes organisiert.
 	Neue Module oder Funtkionen werden einer Applikation honzugefügt, indem sie in Gemfile definiert werden.
 	Nach jeder Änderung der Datei Gemfile muss auf der Konsole im Projektverzeichnis der Befehl <bundle install> abgesetzt werden.
 
@@ -40,4 +40,3 @@ Ablauf der Seitenerstellung:
 		2. Gibt es einen Controller mit dem Namen: EventsController
 		3. Gibt es eine Action (Methode) mit dem Namen index
 		4. Gibt es eine Datei im Views-Ordner in dem Unterordner mit der Bezeichnung des Controllers (events) und dem Namen der Action (index.html.erb)
-		

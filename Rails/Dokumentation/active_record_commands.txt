@@ -1,0 +1,12 @@
+Alle Befehle mit der Model-klasse Event.
+Anlegen eines neuen Events:
+	e = Event.new
+	e.name = "Eventname"
+	...
+	e.save
+
+Anzeigen aller Events:
+	Event.all
+
+Suchen eines speziellen Events:
+	Event.find_by(name: "Eventname")
