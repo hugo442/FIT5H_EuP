@@ -1,0 +1,72 @@
+1-2) mit console in den ordner navigieren und 'rails new flix'		
+
+3) unter vendor -> Gemfile den 'therubyracer' aktivieren			 #Wird mit der vorlage gemfile.lock verglichen. Gemfile gibt an welche er laden soll.
+
+4) mit console in den ordner navigieren und 'bundle install'		
+
+5) 'rails s' in console startet den Server				#http://localhost:3000 	rails s p-3001 startet den server auf port 3001
+														#http://localhost:3000/events zeigt die Routen an
+
+6) unter config routes.rb get "movies => movies#index" hinzufügen
+
+7) 'rails g controller movies'
+
+8) unter app/controllers/movies_controller.rb hinzufügen:
+	def index
+		@movies = ["Iron Man", "Superman", "Spider-Man"]
+	end
+
+9) unter app/views/events/index.html.erb z.B.
+	<h1>Movies</h1>
+	<ul>
+		<% @movies.each do |movies| %>
+			<li><%= movies %></li>
+		<% end %>
+	</ul> 
+
+	oder 
+
+	<h1>Movies</h1>
+
+	<ul>
+		<% @movies.each do |movie| %>
+			<li>
+				Titel: <%= movie.name %>;
+				Beschreibung: <%= movie.description %>;
+				Start: <%= movie.released_on %>.
+			</li>
+		<% end %>
+	</ul>
+
+10) rails g model movie name:string				#erstellt den Create Table befehl
+	in db/migrate/2016... 
+
+11) rake db:migrate								#schaut nach ob in db/migrate/2016... die Tabellen existieren, wenn nicht werden diese erstellt
+
+13) Movies.all (aus Modell Ordner die Klasse als Bezeichnung nehmen)	#zeigt an
+	m = Movies.new		#lasbares und schreibbares atrribut
+	m.name = "Weihnachten"
+	m.date = "2016-12-24"
+	m.save				#speichert das attribut
+
+	oder
+
+	Movies.create(name: "Weinen", datum: "2017-05-05")		#legt direkt einen Datensatz an
+
+14) in app/controllers movies_controller.rb
+	@movies = Movies.all hinzufügen
+	
+15) http://localhost:3000/movies öffnen
+
+16) rails g migration AddFieldsToMovies start_date:datetime description:text	#fügt spalten hinzu
+	db/migrate/2016.._add_fields_to 		# da findet man die tabelle
+	rake db:migrate:status		#status abfragen
+	rake db:migrate				#erstellen
+	rake db:rollback			#entfernt den letzten migrate (z.b. tabelle oder spalte)
+	rake db:reset				#loescht alle Tabellen/eintraege und macht ein seed hinterher
+	rake db:seed  				#fuegt die eintraege von seeds.rb hinzu
+
+17) option: in db/migrate/seeds.rb koennen paar basis datensaetze definiert werden:
+	z.B. Event.create(name: "Sommerferien", description: "Schiwtzen, baden, schwitzen", sart_date: 100.days.from_now, location: "Hamburg", price: 1000.00)
+	anschließend rake db:seed
+	#in "rails c" kann man vorher den Befehl pruefen oder mit Events.count die Anzahl der eintraege zaehlen

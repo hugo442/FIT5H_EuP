@@ -3,9 +3,9 @@
 <ul>
 	<% @movies.each do |movie| %>
 		<li>
-			Titel: <%= movie.title %>;
-			Rating: <%= movie.rating %>;
-			Größe: <%= movie.total_gross %>.
+			Titel: <%= movie.name %>;
+			Beschreibung: <%= movie.description %>;
+			Start: <%= movie.released_on %>.
 		</li>
 	<% end %>
 </ul>
