@@ -1,0 +1,17 @@
+Submit_New_Delete_Edit
+
+app/controllers/movies_controller.rb -> bearbeiten
+Die Funktionen aus der routes.rb werden in Methoden verwendet.
+z.B.
+	def create
+		@movie = Movie.create(movie_params)
+		redirect_to movies_path
+	end
+
+app/views/movies -> die Seiten hinzufügen/bearbeiten
+die Seiten müssen so benannte werden, wie die Funktion der einzelnen Routen
+
+db/schema.rb -> Spaltenübersicht sehen
+
+app/config routes.rb -> hinzufügen resources :movies
+damit man in localhost:3000/app alle Routes hat

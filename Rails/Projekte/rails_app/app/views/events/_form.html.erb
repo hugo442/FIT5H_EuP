@@ -1,0 +1,38 @@
+<%= form_for(@event) do |f| %>
+	<% if @event.errors.any? %>
+		<div class="panel">
+			<h2>Der Datensatz <%= @event.class.name.titleize.downcase %> konnte nicht gespeichert werden</h2>
+			<%#= @event.errors.full_messages.to_sentence %>
+			Korrigieren Sie bitte die <%= pluralize(@event.errors.count, 'den', 'die') %> Fehler.
+			<p>
+				<ul>
+					<% @event.errors.full_messages.each do |message| %>
+						<li><%= message %></li>
+					<% end %>
+				</ul>
+			</p>
+		</div>
+	<% end %>
+	<p>
+		<%= f.label :name %>
+		<%= f.text_field :name %>
+	</p>
+	<p>
+		<%= f.label :description %>
+		<%= f.text_area :description %>
+	</p>
+	<p>
+		<%= f.label :location %>
+		<%= f.text_field :location %>
+	</p>
+	<p>
+		<%= f.label :price %>
+		<%= f.number_field :price %>
+	</p>
+	<p>
+		<%= f.label :start_date %>
+		<%= f.datetime_select :start_date %>
+	</p>
+	<p><%= f.submit %></p>
+
+<% end %>

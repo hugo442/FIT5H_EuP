@@ -1,0 +1,12 @@
+1)
+de.yml - Datei in config/locales hinzufügen
+
+2)
+time_formats.rb - Datei in config/initializers hinzufügen mit dem Inhalt.
+Time::DATE_FORMATS[:default] = "%d.%m.%Y %H:%M"
+
+3)
+application.rb - in die Klasse folgendes hinzufügen:
+		config.i18n.available_locales = [:de, :en]
+		config.time_zone = "Berlin"
+		config.i18n.default_locale = :de

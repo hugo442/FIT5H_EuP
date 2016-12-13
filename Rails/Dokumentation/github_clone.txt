@@ -1,0 +1,14 @@
+1)
+git clone %https://github.com/g16bogner/FIT5H_EuP.git%
+
+2)
+übers terminal in den Ordner navigieren z.B. flix
+
+3)
+rake db:rollback (so oft wie viele Migration-files es gibt)
+
+4)
+rake db:migrate
+
+5)
+rake db:seed

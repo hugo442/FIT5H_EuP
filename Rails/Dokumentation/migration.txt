@@ -21,7 +21,7 @@ Befehle:
 		Führt die Änderungen aus der Migrations-Datei an der Tabelle in der Datenbank durch
 
 	rake db:migrate:status
-		Zeigt welche Migrations(dateien) bereits durchgeführt wurden (up) oder welche noch nicht iun der Tabelle wirksam sind (down)
+		Zeigt welche Migrations(dateien) bereits durchgeführt wurden (up) oder welche noch nicht in der Tabelle wirksam sind (down)
 
 	rake db:rollback
 		Nimmt die Anweisungen der letzten Migration-Datei wieder zurück

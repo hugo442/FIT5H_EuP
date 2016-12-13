@@ -1,11 +1,18 @@
-<h1>Movies</h1>
-
-<ul>
+<h1><%= pluralize(@movies.count, "Event" ) %></h1>
+<table>
+	<tr>
+		<td>Name</td><td>Beschreibung</td><td>Erscheinungsdatum</td>
+	</tr>
 	<% @movies.each do |movie| %>
-		<li>
-			Titel: <%= movie.name %>;
-			Beschreibung: <%= movie.description %>;
-			Start: <%= movie.released_on %>.
-		</li>
-	<% end %>
-</ul>
+	<tr>
+		<td><%= movie.name %></td>
+		<td><%= movie.description %></td>
+		<td><%= movie.released_on %></td>
+		<td><%= link_to "Show", movie_path(movie.id) %></td>
+		<td><%= link_to "Edit", edit_movie_path(movie.id) %></td>
+		<td><%= link_to "Delete", movie_path(movie.id), method: :delete, data: { confirm: 'Sicher löschen?'} %></td>
+
+	</tr>
+<% end %>
+
+<p><%= link_to "Neuer Movie", new_movie_path %></p>
