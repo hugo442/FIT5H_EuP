@@ -70,3 +70,17 @@
 	z.B. Event.create(name: "Sommerferien", description: "Schiwtzen, baden, schwitzen", sart_date: 100.days.from_now, location: "Hamburg", price: 1000.00)
 	anschließend rake db:seed
 	#in "rails c" kann man vorher den Befehl pruefen oder mit Events.count die Anzahl der eintraege zaehlen
+
+
+
+
+
+	____________________________
+
+
+
+	Neuen Controller erstellen Verküpfungen (1:n)
+
+	1. rails g scaffold review name:string stars:integer comment:string movie_id:integer
+	2. rake db:migrate
+	

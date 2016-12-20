@@ -1,6 +1,4 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Registrations</h1>
+<h1>Registrations von Event: <%= @event.name %></h1>
 
 <table>
   <thead>
@@ -20,9 +18,9 @@
         <td><%= registration.email %></td>
         <td><%= registration.how_heard %></td>
         <td><%= registration.event %></td>
-        <td><%= link_to 'Show', registration %></td>
-        <td><%= link_to 'Edit', edit_registration_path(registration) %></td>
-        <td><%= link_to 'Destroy', registration, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', event_registration_path(@event.id, registration.id) %></td>
+        <td><%= link_to 'Edit', edit_event_registration_path(@event.id, registration.id) %></td>
+        <td><%= link_to 'Destroy', event_registration_path(@event.id, registration.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -30,4 +28,4 @@
 
 <br>
 
-<%= link_to 'New Registration', new_registration_path %>
+<%= link_to 'New Registration', new_event_registration_path(@event.id) %>

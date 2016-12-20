@@ -1,0 +1,11 @@
+.flash_notice {
+	background-color: darkgreen;
+	color: white;
+	padding: 20px;
+}
+
+.flash_alert { 
+	background-color: red;
+	color: white; 
+	padding: 20px;
+}

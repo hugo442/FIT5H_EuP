@@ -1,0 +1,24 @@
+<h2><%= @movie.name %></h2>
+
+<p>
+  <strong>Name:</strong>
+  <%= @review.name %>
+</p>
+
+<p>
+  <strong>Stars:</strong>
+  <%= @review.stars %>
+</p>
+
+<p>
+  <strong>Comment:</strong>
+  <%= @review.comment %>
+</p>
+
+<p>
+  <strong>Movie:</strong>
+  <%= @review.movie_id %>
+</p>
+
+<%= link_to 'Edit', edit_movie_review_path(@movie.id, @review.id) %> |
+<%= link_to 'Back', movie_reviews_path(@movie.id) %>
