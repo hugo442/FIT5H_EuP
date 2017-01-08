@@ -1,0 +1,2 @@
+class Schuetze < ApplicationRecord
+end

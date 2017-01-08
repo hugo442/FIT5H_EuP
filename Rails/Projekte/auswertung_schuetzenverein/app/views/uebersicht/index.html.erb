@@ -1,0 +1,19 @@
+<h1>Uebersicht</h1>
+<table>
+	<tr>
+		<th>StartNummer</th>
+		<th>Name</th>
+		<th>Name</th>
+		<th>Ort</th>
+		
+	</tr>
+		<% @schuetzes.each do |schuetze| %>
+			<tr>
+				<td><%= schuetze.startnummer %></td>
+				<td><%= schuetze.vorname %></td>
+				<td><%= schuetze.name %></td>
+				<td><%= schuetze.ort %></td>
+
+			</tr>
+		<% end %>
+</table>

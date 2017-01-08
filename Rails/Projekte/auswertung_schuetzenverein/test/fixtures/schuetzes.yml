@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  startnummer: 1
+  vorname: MyString
+  name: MyString
+  ort: MyString
+
+two:
+  startnummer: 1
+  vorname: MyString
+  name: MyString
+  ort: MyString
