@@ -1,0 +1,1 @@
+json.array! @marksmen, partial: 'marksmen/marksman', as: :marksman

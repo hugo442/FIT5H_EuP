@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Marksmen</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Startnr</th>
+      <th>Firstname</th>
+      <th>Surname</th>
+      <th>Location</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @marksmen.each do |marksman| %>
+      <tr>
+        <td><%= marksman.startnr %></td>
+        <td><%= marksman.firstname %></td>
+        <td><%= marksman.surname %></td>
+        <td><%= marksman.location %></td>
+        <td><%= link_to 'Show', marksman %></td>
+        <td><%= link_to 'Edit', edit_marksman_path(marksman) %></td>
+        <td><%= link_to 'Destroy', marksman, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Marksman', new_marksman_path %>

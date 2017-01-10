@@ -1,0 +1,2 @@
+class Marksman < ApplicationRecord
+end
