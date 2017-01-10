@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Quality:</strong>
+  <%= @like.quality %>
+</p>
+
+<p>
+  <strong>Book:</strong>
+  <%= @like.book.title %>
+</p>
+
+<%= link_to 'Edit', edit_book_like_path(@book.id, @like.id) %> |
+<%= link_to 'Back', book_likes_path(@book.id) %>
