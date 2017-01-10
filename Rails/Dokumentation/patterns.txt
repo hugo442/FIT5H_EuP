@@ -15,3 +15,13 @@ Convention Over Configuration
 
 	Prinzip der geringsten Überraschung
 		Der User sollte Funktionen und Methoden erraten können
+
+CRUD (Create, Read, Update, Delete)
+	Die Standardactions einer Webanwendung:
+		index: alle Elemente werden gezeigt
+		show: ein einzelnes Element wird angezeigt
+		new: Formular zur Erzeugung eines Elements
+		create: Action zum Speichern eines neuen Elements
+		edit: Formular zum verändern eines Elements
+		update: Action zur Durchführung der Änderung in der Tabelle
+		destroy: Action zum Löschen eines Elements

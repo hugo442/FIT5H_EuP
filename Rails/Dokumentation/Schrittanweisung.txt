@@ -9,7 +9,7 @@
 
 6) unter config routes.rb get "movies => movies#index" hinzufügen
 
-7) 'rails g controller movies'
+7) 'rails g controller movies' (lieber scaffold nehmen)
 
 8) unter app/controllers/movies_controller.rb hinzufügen:
 	def index

@@ -9,7 +9,7 @@ namespace :import do
       fields = line.split(";")
       if fields[0].blank? || fields[1].blank? || fields[2].blank?
         then
-         #puts "huso"
+         #puts "so"
           next
           
       end
