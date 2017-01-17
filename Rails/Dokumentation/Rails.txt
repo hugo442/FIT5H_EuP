@@ -1,0 +1,100 @@
+Der Befehl rails wird immer in der Basis der Applikations ausgeführt.
+Das Programm rails ermöglicht auf der Console ausgeführt eine Reihe von Aktionen:
+
+rails g controller events
+	erstellt in der App einen Controller mit dem Namen events_controller.rb
+ 
+rails d controller events
+	löscht die Dateien die durch den Geenrator erstellt wurden
+
+rails g model event name:string location:string price:decimal
+	es werden Dateien zur Erstellung einer Tabelle erzeugt, mit dem Namen events und den Spalten: name, location, price
+
+rails g scaffold event name:string location:string price:decimal
+	es wird eine komplette Resource erstellt; d.h.:
+	- in routes.rb wird die Zeile hinzugefügt:
+		resources :event
+	- Dateien zur Erstellung einer Tabelle erzeugt, mit dem namen events und den Spalten: name, location, price
+	- Controller mit allen Actions
+	-View-Ordner events mit allen Dateien
+
+
+(neuen ordner erstellen in Projekte mit 'movies')	 			
+
+2) mit console in den ordner navigieren und 'rails new flix'		
+
+3) unter Gemfile den 'therubyracer' aktivieren			 #Wird mit der vorlage gemfile.lock verglichen. Gemfile gibt an welche er laden soll.
+
+4) im ordner flix 'bundle install'
+
+5) 'rails s' in console startet den Server				#http://localhost:3000 	rails s p-3001 startet den server auf port 3001
+														#http://localhost:3000/events zeigt die Routen an
+
+6) config/routes.rb get "movies => movies#index" hinzufügen
+
+7) 'rails g controller movies'
+
+8) in app/controllers/movies_controller.rb erstellen
+	def index
+		@movies = ["Iron Man", "Superman", "Spider-Man"]
+	end
+
+	oder
+
+	def index
+		@movies = Movies.all hinzufügen
+	end
+
+9) unter app/views/movies/index.html.erb z.B.
+	<h1>Movies</h1>
+	<ul>
+		<% @movies.each do |movies| %>
+			<li><%= movies %></li>
+		<% end %>
+	</ul> 
+
+	oder 
+
+	<h1>Movies</h1>
+	<table>
+		<tr>
+			<td>Name</td> 
+		</tr>
+		<% @movies.each do |movies| %>
+		<tr>
+			<td><%= movies %></td>
+		</tr> 
+	<% end %>
+
+10) rails g model movie name:string				#erstellt den Create-table befehl in db/migrate/2016... 
+
+11) rake db:migrate								#schaut nach ob in db/migrate/2016... die Tabellen existieren, wenn nicht werden diese erstellt
+
+13) Movie.all (aus Modell Ordner die Klasse als Bezeichnung nehmen)	#zeigt an
+	m = Movie.new		#lesbares und schreibbares attribut
+	m.name = "Weihnachten"
+	m.date = "2016-12-24"
+	m.save				#speichert das attribut
+ 
+	oder
+
+	Movie.create(name: "Weinen", datum: "2017-05-05")		#legt direkt einen Datensatz an
+	
+15) http://localhost:3000/movies öffnen
+
+16) rails g migration AddFieldsToMovies start_date:datetime description:text	#fügt spalten hinzu
+	db/migrate/2016.._add_fields_to 		# da findet man die tabelle
+	rake db:migrate:status		#status abfragen
+	rake db:migrate				#erstellen
+	rake db:rollback			#entfernt den letzten migrate (z.b. tabelle oder spalte)
+	rake db:reset				#loescht alle Tabellen/eintraege und macht ein seed hinterher
+	rake db:seed  				#fuegt die eintraege von seeds.rb hinzu
+
+	rails g migration ChangeTableLike #erstellt eine migrate datei mit einer Change Methode
+	change_column :tabellename, :spaltenname, :typ_neu #um den Typ zu ändern von text in string
+	rename_column :tabellenname, :spaltenname_alt, spaltenname_neu #um den Spaltenname zu ändern
+
+17) option: in db/migrate/seeds.rb koennen paar basis datensaetze definiert werden:
+	z.B. Event.create(name: "Sommerferien", description: "Schiwtzen, baden, schwitzen", sart_date: 100.days.from_now, location: "Hamburg", price: 1000.00)
+	anschließend rake db:seed
+	#in "rails c" kann man vorher den Befehl pruefen oder mit Events.count die Anzahl der eintraege zaehlen

@@ -1,0 +1,5 @@
+1) in routes.rb Verschachtelung zwischen den resourcen vornehmen
+2) In index.html.erb von Movies einen Button Ratings hinzufügen
+4) In dem Controller von der n-beziehung die def index anpassen.
+5) In der reviews_controller.rb die before bedingung hinzufügen, sowie Methode hinzufügen
+3) Schritt für Schritt in den Views Ordner von reviews dei Dateien anpassen (Fehlercode)   

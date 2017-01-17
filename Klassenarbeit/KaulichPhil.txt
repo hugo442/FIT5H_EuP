@@ -1,0 +1,175 @@
+Nr. 1
+a) Console
+	rails g scaffold projects title:string description:text start_date:datetime
+
+b) Console
+	rake db:migrate
+
+c) Console/Rails s or db/seeds.rb
+	Project.create(title: "Pruefungsvorbereitung EuP", description: "Alles was fuer EuP zu lernen ist", start_date: "2017-04-01")
+	Project.create(title: "Facharbeit", description: "Planen, Durchfuehren, Beschreiben eines themas", start_date: "2017-02-01")
+
+d) app/views/projects/index.html.erb
+	<h1><%= @projects.count %> Project/s</h1>
+
+e) app/views/projects/index.html.erb
+	<td><%= truncate(project.description, length: 30) %></td>
+
+f) .yml datei hab ich aus rails app kopiert
+	de.yml - Datei in config/locales hinzufügen
+
+	time_formats.rb - Datei in config/initializers hinzufügen mit dem Inhalt.
+	Time::DATE_FORMATS[:default] = "%d.%m.%Y"
+
+	application.rb - in die Klasse folgendes hinzufügen:
+			config.i18n.available_locales = [:de, :en]
+			config.time_zone = "Berlin"
+			config.i18n.default_locale = :de
+
+g) app/models/project.rb
+	validates :title, presence: true
+
+h) x
+	
+
+i) Console
+	rails g migration AddFieldsToProjects end_date:datetime
+
+j) Console
+	rake db:migrate
+	rails c:
+	e = Project.first
+	e.end_date = "2018-02-04"
+	e.save
+
+k) app/views/projects/index.html.erb
+	<th>End date</th>
+	<td><%= project.end_date %></td>
+
+	app/views/projects/show.html.erb
+	<p>
+  		<strong>End date:</strong>
+  		<%= @project.end_date %>
+	</p>
+
+	app/views/projects/_form.html.erb
+	<div class="field">
+    	<%= f.label :end_date %>
+    	<%= f.datetime_select :end_date %>
+  	</div>
+
+  	app/views/projects/edit.html.erb
+  		sobald man die _form.html.erb anpasst ändert sich die "form" für edit mit.
+
+  	app/views/projects/new.html.erb
+  		sobald man die _form.html.erb anpasst ändert sich die "form" für new mit.
+
+ l) app/controllers/projects_controller.rb
+ 	def project_params
+    	params.require(:project).permit(:title, :description, :start_date, :end_date)
+    end
+
+Nr. 2
+a) Console
+	rails g scaffold iterations title:string description:text start_date:datetime end_date:datetime project:references
+
+	app/models/project.rb
+	has_many :iterations, dependent: :destroy
+
+	app/models/iteration.rb
+	belongs_to :project
+
+b) config/routes.rb
+	resources :projects do
+  		resources :iterations
+  	end
+
+c) app/controllers/iteratons_controller.rb
+	before_action :set_project
+
+	private
+	def set_project
+      @project = Project.find(params[:project_id])
+    end
+
+d) app/views/projects/index.html.erb
+	<td><%= link_to "Iterations", project_iterations_path(project.id) %></td>
+	(in der each do schleife vor der "show")
+
+	app/controllers/iteration_controller.rb
+	def index
+    	@iterations = @project.iterations
+  	end
+
+e) rails c or db/seeds.rb
+	Iteration.create(title: "Literatur sichten", description: "Alle ueber das Thema zusammensuchen", start_date: "2017-02-01", end_date: "2017-02-10", project_id: "1")
+
+f) app/views/iterations/index.html.erb
+		<h1>Iterations fuer <%= @project.title %></h1>
+		<td><%= link_to 'Show', project_iteration_path(@project.id, iteration.id) %></td>
+        <td><%= link_to 'Edit', edit_project_iteration_path(@project.id, iteration.id) %></td>
+        <td><%= link_to 'Destroy', project_iteration_path(@project.id, iteration.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+		<%= link_to 'New Iteration', new_project_iteration_path %>
+
+	app/views/iterations/show.html.erb
+		<h2><%= @project.title %></h2>
+		<%= link_to 'Edit', edit_project_iteration_path(@project.id, @iteration.id) %> |
+		<%= link_to 'Back', project_iterations_path(@project.id) %>
+
+	app/views/iterations/edit.html.erb
+		<h1>Editing Iteration fuer <%= @project.title %></h1>
+		<%= link_to 'Show', project_iteration_path(@project.id, @iteration.id) %> |
+		<%= link_to 'Back', project_iterations_path(@project.id) %>
+
+	app/views/iterations/new.html.erb
+		<h1>New Iteration fuer <%= @project.title %></h1>
+		<%= link_to 'Back', project_iterations_path(@project.id) %>
+
+
+
+g) app/controllers/iteration_controller.rb
+  	def new
+    	@iteration = @project.iterations.new
+  	end
+
+  	def create
+	    @iteration = @project.iterations.new(iteration_params)
+
+	    respond_to do |format|
+	      if @iteration.save
+	        format.html { redirect_to project_iteration_path(@project.id, @iteration.id), notice: 'Iteration was successfully created.' }
+	        format.json { render :show, status: :created, location: @iteration }
+	      else
+	        format.html { render :new }
+	        format.json { render json: @iteration.errors, status: :unprocessable_entity }
+	      end
+	    end
+  	end
+
+  	def update
+	    respond_to do |format|
+	      if @iteration.update(iteration_params)
+	        format.html { redirect_to project_iteration_path(@project.id, @iteration.id), notice: 'Iteration was successfully updated.' }
+	        format.json { render :show, status: :ok, location: @iteration }
+	      else
+	        format.html { render :edit }
+	        format.json { render json: @iteration.errors, status: :unprocessable_entity }
+	      end
+	    end
+  	end
+
+  	def destroy
+	    @iteration.destroy
+	    respond_to do |format|
+	      format.html { redirect_to project_iterations_url(@project.id), notice: 'Iteration was successfully destroyed.' }
+	      format.json { head :no_content }
+	    end
+  	end
+
+h) app/views/iterations/_form.html.erb
+	<%= form_for([@project, @iteration]) do |f| %>
+	LÖSCHEN:
+		<div class="field">
+	 		<%= f.label :project_id %>
+			<%= f.text_field :project_id %>
+	  	</div>
