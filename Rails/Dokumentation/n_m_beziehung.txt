@@ -1,0 +1,62 @@
+1.	migration erzeugen
+		rails g migration MakeRegistrationAsAJoinTable
+
+2. 	db/migrate/20170131112622_make_registration_as_a_join_table.rb
+	def up
+	  	Registration.delete_all
+	  	remove_column :registrations, :name
+	  	remove_column :registrations, :email
+	  	add_column :registrations, :user_id, :integer
+  	end
+
+  	def down
+	  	Registration.delete_all
+	  	add_column :registrations, :name, :string
+	  	add_column :registrations, :email, :string
+	  	remove_column :registrations, :user_id, :integer
+ 	end
+ 		Beim migrate nimmt er die "up"-methode und beim Rollback die "down"-methode
+
+3. 	app/models/registration.rb
+		belongs_to :user
+			hinzufügen für die 1:n beziehung
+
+4.	app/models/users.rb
+		has_many :registrations, :dependent => :destroy
+			hinzufügen für die 1:n beziehung
+
+5. 	app/views/registrations/_form.html.erb
+		löschen der Eingabefelder name und email
+			wird jetzt durch die 1:n beziehung mitgegeben. bzw durch den eingeloggten benutzer.
+
+6. 	app/controllers/registrations_controller.rb
+		def registration_params
+      		params.require(:registration).permit(:how_heard, :user_id, :event_id)
+    	end
+    		anpassen. Rauslöschen von name und email und einfügen von user_id.
+
+7.	app/controllers/registrations_controller.rb
+		Zeile 30: @registration.user_id = current_user.id
+			hinzufügen um bei einer registrierung die 1:n beziehung aufrecht zu erhalten
+
+8. 	app/models/registration.rb
+		validates :user_id, presence: true
+  		validates :how_heard, inclusion: { in: HOW_HEARD_OPTIONS }
+  			anpassen an die restlichen einstellungen
+
+9. 	app/views/registrations/show.html.erb
+		<p>
+		  <strong>Name:</strong>
+		  <%= @registration.user.name %>
+		</p>
+
+		<p>
+		  <strong>Email:</strong>
+		  <%= @registration.user.email %>
+		</p>
+			Anpassen der Darstellung
+
+10.	app/views/registrations/index.html.erb
+		<td><%= registration.user.name %></td>
+        <td><%= registration.user.email %></td>
+        	Anpassen der Darstellung

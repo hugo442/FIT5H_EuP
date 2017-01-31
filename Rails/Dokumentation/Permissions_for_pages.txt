@@ -1,0 +1,49 @@
+Pages_for_logedin
+
+1) in app/controllers/events_controller.rb hinzufügen:
+before_action :require_signin, :except => [:index]
+
+2)in app/controllers/registrations_controller.rb hinzufügen:
+before_action :require_signin
+
+3) in app/controllers/users_controller.rb hinzufügen:
+before_action :require_signin, :except => [:new, :create]  
+
+4) in app/controllers/application_controller.rb hinzufügen:
+		def require_signin
+			unless current_user
+				redirect_to new_session_url, alert: "Please sign in first!!!"
+			end
+		end
+
+5) in app/controllers/users_controller.rb hinzufügen:
+before_action :require_correct_user, only: [:edit, :update, :destroy]
+
+6) in app/controllers/users_controller.rb im private Bereich:
+    def require_correct_user
+      unless current_user == @user
+        redirect_to users_url, alert: "No permission!"
+      end
+    end
+
+7) in app/controllers/users_controller.rb in die create Methode hinzufügen:
+session[:user_id] = @user.id
+
+rails g migration AddAdminToUsers admin:boolean
+rake db:migrate
+
+8) in app/controllers/application_controller.rb hinzufügen:
+  def require_admin
+      unless current_user && current_user.admin?
+        redirect_to root_url, alert: "You are no admin!"
+      end
+  end
+
+9) in app/controllers/events_controller.rb hinzufügen:
+before_action :require_admin, :except => [:index, :show]
+
+10) in app/controllers/application_controller.rb hinzufügen:
+  def current_user_admin?
+      current_user && current_user.admin?
+  end
+  helper_method :current_user_admin?
