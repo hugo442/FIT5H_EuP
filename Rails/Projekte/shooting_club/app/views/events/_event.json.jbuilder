@@ -1,0 +1,2 @@
+json.extract! event, :id, :name, :unknown0, :unknown1, :shooting_range, :marksmen, :unknown2, :unknown3, :shoot_number, :value, :unknown4, :unknown5, :unknown6, :unknown7, :unknown8, :time, :unknown9, :date, :unknown10, :unknown11, :created_at, :updated_at
+json.url event_url(event, format: :json)

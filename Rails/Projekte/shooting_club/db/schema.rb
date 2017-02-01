@@ -10,7 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170110165918) do
+ActiveRecord::Schema.define(version: 20170201113145) do
+
+  create_table "events", force: :cascade do |t|
+    t.string   "name"
+    t.string   "unknown0"
+    t.string   "unknown1"
+    t.integer  "shooting_range"
+    t.integer  "marksmen"
+    t.string   "unknown2"
+    t.string   "unknown3"
+    t.integer  "shoot_number"
+    t.float    "value"
+    t.string   "unknown4"
+    t.string   "unknown5"
+    t.string   "unknown6"
+    t.string   "unknown7"
+    t.string   "unknown8"
+    t.time     "time"
+    t.string   "unknown9"
+    t.date     "date"
+    t.string   "unknown10"
+    t.string   "unknown11"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
 
   create_table "marksmen", force: :cascade do |t|
     t.integer  "startnr"
