@@ -10,5 +10,15 @@
   <%= @user.email %>
 </p>
 
+<% if @liked_events.any? %>
+	<h3>Liked Events</h3>
+	<p>
+		<ul>
+			<% @liked_events.each do | event | %>
+				<li><%= event.name %></li>
+			<% end %>
+		</ul>
+	</p>
+<% end %>
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>

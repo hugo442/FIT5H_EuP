@@ -60,3 +60,34 @@
 		<td><%= registration.user.name %></td>
         <td><%= registration.user.email %></td>
         	Anpassen der Darstellung
+
+11.	console
+		rails g resource like event:references user:references
+		rake db:migrate
+
+12.	app/models/event.rb
+		has_many :likes, dependent: :destroy
+		has_many :liker, through: :likes, source: :user
+			Wir verbinden die Tabellen mit dem Befehl through: über die Tabelle likes
+
+13.	app/models/user.rb
+		has_many :likes, dependent: :destroy
+  		has_many :liked_events, through: :likes, source: :event
+  			Wir verbinden die Tabellen mit dem Befehl through: über die Tabelle likes
+
+14. app/controllers/users_controller.rb
+		  def show
+		  	@liked_events = @user.liked_events
+		  end
+		
+15.	app/views/users/show.html.erb
+		<% if @liked_events.any? %>
+			<h3>Liked Events</h3>
+			<p>
+				<ul>
+					<% @liked_events.each do | event | %>
+						<li><%= event.name %></li>
+					<% end %>
+				</ul>
+			</p>
+		<% end %>
