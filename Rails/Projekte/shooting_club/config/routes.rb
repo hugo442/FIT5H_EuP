@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+
+  resources :resumes, only: [:index, :new, :create, :destroy]
+
   resources :events
   root "marksmen#index"
   resources :marksmen
