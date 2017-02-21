@@ -46,7 +46,7 @@ ActiveRecord::Schema.define(version: 20170207163714) do
   end
 
   create_table "resumes", force: :cascade do |t|
-    t.string   "name"
+    t.text     "note"
     t.string   "attachment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

@@ -3,24 +3,27 @@
   <%= flash[:notice] %>
   </div>
 <% end %>
-<br />
+<br/>
 <%= link_to "New Resume", new_resume_path, class: "btn btn-primary" %>
-<br />
-<br />
+<br/>
+<br/>
 <table class="table table-bordered table-striped">
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Download Link</th>
+      <th>Downloadfile</th>
+      <th>Notiz</th>
+      <th>Erstellt am</th>
       <th>&nbsp;</th>
     </tr>
   </thead>
   <tbody>
     <% @resumes.each do |resume| %>
       <tr>
-        <td><%= resume.name %></td>
-        <td><%= link_to "Download Resume", resume.attachment_url %></td>
-        <td><%= button_to "Delete",  resume, method: :delete, class: "btn btn-danger", confirm: "Are you sure that you wish to delete #{resume.name}?" %></td>
+        <td><%= link_to "#{resume.attachment_identifier}", resume.attachment_url %></td>
+        <td><%= resume.note %></td>
+        <td><%= resume.created_at.strftime("%d.%m.%Y %H:%M Uhr") %></td>
+        <td><%= button_to 'Import', import_event_path(resume.id), class: "btn btn-primary" %>
+          <%= button_to "Delete", resume, method: :delete, class: "btn btn-danger", data: { confirm: "Are you sure that you wish to delete #{resume.attachment_identifier}?" } %></td>
       </tr>
     <% end %>
   </tbody>

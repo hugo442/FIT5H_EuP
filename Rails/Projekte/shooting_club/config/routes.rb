@@ -1,8 +1,12 @@
 Rails.application.routes.draw do
 
-  resources :resumes, only: [:index, :new, :create, :destroy]
+  resources :resumes
 
-  resources :events
+  resources :events do 
+  	member do
+  		get 'import'
+  	end
+  end
   root "marksmen#index"
   resources :marksmen
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
