@@ -17,7 +17,7 @@ class AttachmentUploader < CarrierWave::Uploader::Base
   #end
 
   def filename
-    @name ||= "#{timestamp}_#{super}" if original_filename.present? and super.present?
+    @name ||= "#{timestamp}_Schuetzenverein.log" #if original_filename.present? and super.present?
   end
 
   def timestamp
