@@ -15,9 +15,8 @@ class CreateEvents < ActiveRecord::Migration[5.0]
       t.string :unknown6
       t.string :unknown7
       t.string :unknown8
-      t.time :time
+      t.datetime :time_date
       t.string :unknown9
-      t.date :date
       t.string :unknown10
       t.string :unknown11
 
