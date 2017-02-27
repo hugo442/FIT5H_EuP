@@ -15,3 +15,7 @@
  *= require foundation_and_overrides
  *= require foundation
  */
+.alert1 {
+	background-color: red;
+	color: white;
+}

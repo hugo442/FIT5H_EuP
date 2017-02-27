@@ -4,7 +4,7 @@
   </div>
 <% end %>
 <br/>
-<%= link_to "New Resume", new_resume_path, class: "btn btn-primary" %>
+<%= button_to "New Resume", new_resume_path, method: :get, class: "btn btn-primary" %>
 <br/>
 <br/>
 <table class="table table-bordered table-striped">
@@ -22,7 +22,7 @@
         <td><%= link_to "#{resume.attachment_identifier}", resume.attachment_url %></td>
         <td><%= resume.note %></td>
         <td><%= resume.created_at.strftime("%d.%m.%Y %H:%M Uhr") %></td>
-        <td><%= link_to 'Import', import_event_path(resume.id), class: "btn btn-primary" %>
+        <td><%= button_to 'Import', import_event_path(resume.id), method: :get, class: "btn btn-primary" %>
           <%= button_to "Delete", resume, method: :delete, class: "btn btn-danger", data: { confirm: "Are you sure that you wish to delete #{resume.attachment_identifier}?" } %></td>
       </tr>
     <% end %>

@@ -17,8 +17,8 @@ namespace :import do
           nr = fields[0]
           strNr = fields[1]
           name = fields[2].split(" ")
-          firstName = name[0]
-          lastName = name[1]
+          firstName = name[1]
+          lastName = name[0]
           city = fields[3]
 
           #puts line

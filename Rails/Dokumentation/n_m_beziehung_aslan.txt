@@ -1,0 +1,105 @@
+1) rails g resource like event:references user:references
+2) (bundle exec) rake db:migrate
+3) app/models/event.rb hinzufügen:
+	has_many :likes, dependent: :destroy
+	has_many :likers, through: :likes, source: :user
+4) app/models/user.rb hinzufügen:
+ 	has_many :likes, dependent: :destroy
+ 	has_many :liked_events, through: :likes, source: :event 
+ggf app/models/favorite.rb hinzufügen: (wegen references schon da)
+  belongs_to :event
+  belongs_to :user
+5) Um beim User zu sehen welche Events er gelikt hat:
+	app/controllers/users_controller.rb hinzufügen:
+	def show
+		@liked_events = @user.liked_events
+	end
+6) Um beim User zu sehen welche Events er gelikt hat:
+	app/views/users/show.html.erb
+<% if @liked_events.any? %>
+	<h3>Liked Events</h3>
+	<p>
+		<ul>
+			<% @liked_events.each do |event| %>
+				<li><%= event.name %></li>
+			<% end %>
+		</ul>
+	</p>
+<% end %>
+7) Um beim Event zu sehen welche User es gelikt hat:
+	app/controllers/events_controller.rb hinzufügen:
+	def show  
+  	  @likers = @event.likers
+	end
+8) Um beim Event zu sehen welche User es gelikt hat:
+	app/views/events/show.html.erb
+<% if @likers.any? %>
+	<h3>Likers</h3>
+	<p>
+		<ul>
+			<% @likers.each do |user| %>
+				<li><%= user.email %></li>
+			<% end %>
+		</ul>
+	</p>
+<% end %>
+9) Über Konsole einen like erstellen:
+	User.all
+	d = User.first
+	d.likes.create(event_id: 1)
+
+10) routes.rb
+resources :likes in die events unterordnen
+
+11) app/views/events/show.html.erb von events:
+<p>
+	<% if like = Like.where(user_id: current_user.id, event_id: @event.id).first %>
+		<%= link_to 'DISLIKE', event_like_path(@event.id, like.id), method: :delete, class: 'button alert'%>
+	<% else %>
+		<%= button_to 'LIKE', event_likes_path(@event), class: 'button primary' %>
+	<% end %>
+</p>
+
+12) app/controllers/likes_controller.rb hinzufügen:
+	def create
+		@event = Event.find(params[:event_id])
+		unless Like.where(user_id: current_user.id, event_id: @event.id).any?
+			@event.likes.create(user_id: current_user.id)
+			redirect_to @event, notice: "Event wurde geliked"
+		else
+			redirect_to @event, alert: "Mehrmals-Like is not really möglich"
+		end
+	end
+	def destroy
+		@like = Like.find(params[:id])
+		@like.delete
+		redirect_to event_path(params[:event_id]), alert: "Du hast erfolgreich dein Like gelöscht"
+	end
+
+1) rails g resource category name:string
+2) rails g model categorization event:references category:references
+3) app/models/categroy.rb hinzufügen:
+	has_many :categorizations, dependent: :destroy
+	has_many :events, through: :categorizations
+
+	validates :name, presence: true
+4) app/models/event.rb hinzufügen:
+	has_many :categorizations, dependent: :destroy
+	has_many :categories, throug: :categorizations
+5) rails c
+	names = %w(Rails Ruby Free Social)
+	names.each { |n| Category.create(name: n) }
+6) category = Category.find_by(name: 'Social')
+7) event = Event.first
+8) event.categories
+9) event.categories << category
+10) event.category_ids = [1,2,3]
+11) event.save
+12) views/events/_form.html.erb
+	<p>
+		<%= f.label :category_ids %>
+		<%= f.collection_check_boxes(:category_ids, Category.all, :id, :name) %>
+	</p>
+13) events_controller.rb in event_params zum Abschicken:
+, :category_ids => [] 
+hinzufügen

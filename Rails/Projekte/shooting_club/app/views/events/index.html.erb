@@ -2,6 +2,9 @@
 
 <h1>Events</h1>
 
+<%= button_to 'DB ueberpruefen', auswertung_path, method: :get, class: "btn btn-primary" %>
+<%= button_to 'New Event', new_event_path, method: :get, class: "btn btn-primary" %>
+
 <table>
   <thead>
     <tr>
@@ -44,7 +47,7 @@
         <td><%= event.unknown6 %></td>
         <td><%= event.unknown7 %></td>
         <td><%= event.unknown8 %></td>
-        <td><%= event.time_date %></td>
+        <td><%= event.time_date.strftime("%d.%m.%Y %H:%M Uhr") %></td>
         <td><%= event.unknown9 %></td>
         <td><%= event.unknown10 %></td>
         <td><%= event.unknown11 %></td>
@@ -58,4 +61,4 @@
 
 <br>
 
-<%= link_to 'New Event', new_event_path %>
+
