@@ -1,4 +1,5 @@
 class Marksman < ApplicationRecord
-	has_many :groups, through: :marksman_group
+	validates :startnr, uniqueness: true
+	has_many :groups, through: :MarksmanGroups
 	has_many :marksman_groups, dependent: :destroy
 end

@@ -4,7 +4,7 @@ class EventsController < ApplicationController
 
   def import
     resume = Resume.find(params[:id])
-    @resumeid = resume.id
+    #@resumeid = resume.id
     @post = Event.import(resume)
   end
   # GET /events

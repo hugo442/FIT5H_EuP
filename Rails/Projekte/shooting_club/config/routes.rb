@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
 	
-  resources :groups
+
+  	resources :groups do
+  		get 'addnew' => 'groups#addnew'
+  		post 'addcreate' => 'groups#addcreate'
+  	end
 	get 'auswertung' => 'events#indexwrong'
   	resources :resumes
   	resources :events do 

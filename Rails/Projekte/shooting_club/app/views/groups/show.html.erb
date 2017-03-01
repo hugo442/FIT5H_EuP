@@ -1,14 +1,24 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
+
+<h4>
   <%= @group.name %>
-</p>
+</h4>
 
 <p>
   <strong>Note:</strong>
   <%= @group.note %>
 </p>
 
+<p>
+  <h4>Member:</h4>
+  	<ul>
+	  <% @list.each do |c| %>
+	  	<li><%= "#{c.firstname} #{c.surname}" %></li>
+	  <% end %>	
+	</ul>
+</p>
+
+<%= link_to 'Add Member', group_addnew_path(@group.id) %>
 <%= link_to 'Edit', edit_group_path(@group) %> |
 <%= link_to 'Back', groups_path %>
