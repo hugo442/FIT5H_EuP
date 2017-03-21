@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
 	
 
+  get 'analysis/index'
+  get 'analysis/select'
+  get 'analysis/calculate'
+
   	resources :groups do
   		get 'addnew' => 'groups#addnew'
   		post 'addcreate' => 'groups#addcreate'
