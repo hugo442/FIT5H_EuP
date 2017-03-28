@@ -5,6 +5,6 @@
 
 	<% method_array = @method.map { |city| [city, city] } %>
 	<%= select_tag "verfahren", options_for_select(method_array) %>
-  
-  <%= submit_tag("Do it") %>
+ <br><br> 
+  <%= submit_tag("Do it", class: "button primary") %>
 <% end %>

@@ -1,24 +1,33 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Startnr:</strong>
+  <strong>Schützennummer:</strong>
   <%= @marksman.startnr %>
 </p>
 
 <p>
-  <strong>Firstname:</strong>
+  <strong>Vorname:</strong>
   <%= @marksman.firstname %>
 </p>
 
 <p>
-  <strong>Surname:</strong>
+  <strong>Nachname:</strong>
   <%= @marksman.surname %>
 </p>
 
 <p>
-  <strong>Location:</strong>
+  <strong>Ortschaft:</strong>
   <%= @marksman.location %>
 </p>
 
+<p>
+  <h4>Gruppenangehörigkeit:</h4>
+  	<ul>
+	  <% @list.each do |c| %>
+	  	<li><%= "#{c.name}" %></li>
+	  <% end %>	
+	</ul>
+</p>
+
 <%= link_to 'Edit', edit_marksman_path(@marksman), class: "button small secondary" %> 
-<%= link_to 'Back', marksmen_path, class: "button small warning" %>
+<%= link_to 'Zurück', marksmen_path, class: "button small warning" %>

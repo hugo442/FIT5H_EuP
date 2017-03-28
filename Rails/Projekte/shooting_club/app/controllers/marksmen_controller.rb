@@ -4,12 +4,21 @@ class MarksmenController < ApplicationController
   # GET /marksmen
   # GET /marksmen.json
   def index
-    @marksmen = Marksman.all
+    if params[:sort] && params[:direction]
+      @marksmen = Marksman.order(params[:sort] + " " + params[:direction]).paginate(:per_page => 20, :page => params[:page])
+    else
+      @marksmen = Marksman.paginate(:per_page => 20, :page => params[:page])
+    end
   end
 
   # GET /marksmen/1
   # GET /marksmen/1.json
   def show
+    @search = MarksmanGroup.where(marksman_id: @marksman.id)
+    @list = []
+    @search.each do |group|
+      @list << Group.find_by(id: group.group_id)
+    end
   end
 
   # GET /marksmen/new
@@ -71,4 +80,6 @@ class MarksmenController < ApplicationController
     def marksman_params
       params.require(:marksman).permit(:startnr, :firstname, :surname, :location)
     end
+
+
 end

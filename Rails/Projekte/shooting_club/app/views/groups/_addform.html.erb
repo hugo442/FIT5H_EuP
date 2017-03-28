@@ -10,18 +10,25 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-
+<div class="row">
+  <div class="medium-4 columns">
     <%= f.hidden_field :group_id %>
   </div>
 
-  <div class="field">
-    <%= f.label :marksman_id %>
-    <%= f.text_field :marksman_id %>
+  <div class="medium-12 columns">
   </div>
 
-  <div class="actions">
-    <%= f.submit %>
+  <div class="medium-4 columns">
+    <%= f.label :marksman_id %>
+    <%= f.text_field :marksman_id %>
+    <br><br><br>
   </div>
+
+  <div class="medium-12 columns">
+  </div>
+
+  <div class="actions medium-12 columns">
+    <%= f.submit 'Abschicken', class: "button primary" %>
+  </div>
+</div>
 <% end %>

@@ -1,3 +1,12 @@
-<h1>Index</h1>
-		<p>Die Datenbank enthält Fehler wollen sie trotzdem fortfahren?</p>
-		<%= button_to 'Ja', analysis_select_path, method: :get, class: "btn btn-primary" %> <%= button_to 'Nein', auswertung_path, method: :get, class: "btn btn-primary" %>
+<p id="notice"><%= notice %></p>
+<h1>Achtung!</h1>
+<br><br>
+
+
+<div class="row">
+  <div class="small-2 large-4 columns">
+  	<h4>Die Datenbank enthält Fehler wollen sie trotzdem fortfahren?</h4><br>
+  	<%= link_to 'Ja', analysis_select_path, method: :get, class: "button small warning" %> <%= link_to 'Nein', auswertung_path, method: :get, class: "button small success" %></div>
+  <div class="small-4 large-4 columns"></div>
+  <div class="small-6 large-4 columns"></div>
+</div>

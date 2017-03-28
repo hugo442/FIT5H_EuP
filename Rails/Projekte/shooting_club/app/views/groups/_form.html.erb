@@ -10,7 +10,7 @@
       </ul>
     </div>
   <% end %>
-
+<div class="row">
   <div class="medium-4 columns">
     <%= f.label :name %>
     <%= f.text_field :name %>
@@ -22,12 +22,14 @@
   <div class="medium-4 columns">
     <%= f.label :note %>
     <%= f.text_field :note %>
+    <br><br>
   </div>
 
   <div class="medium-12 columns">
   </div>
 
-  <div class="actions">
+  <div class="actions medium-12 columns">
     <%= f.submit 'Abschicken', class: "button primary" %>
   </div>
+</div>
 <% end %>
