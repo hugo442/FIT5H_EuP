@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-
+<%= link_to 'Mitglied hinzufügen', group_addnew_path(@group.id), class: "button small primary" %>
 <h4>
   <%= @group.name %>
 </h4>
@@ -11,7 +11,7 @@
 </p>
 
 <p>
-  <h4>Member:</h4>
+  <h4>Mitglieder:</h4>
   	<ul>
 	  <% @list.each do |c| %>
 	  	<li><%= "#{c.firstname} #{c.surname}" %></li>
@@ -19,6 +19,6 @@
 	</ul>
 </p>
 
-<%= link_to 'Add Member', group_addnew_path(@group.id) %>
-<%= link_to 'Edit', edit_group_path(@group) %> |
-<%= link_to 'Back', groups_path %>
+
+<%= link_to 'Edit', edit_group_path(@group), class: "button small secondary" %> |
+<%= link_to 'Zurück', groups_path, class: "button small warning" %>

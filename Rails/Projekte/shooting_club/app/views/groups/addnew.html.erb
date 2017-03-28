@@ -1,7 +1,7 @@
-<h1>New Group</h1>
+<h1>Neue Gruppe:</h1>
 
 <p class="label alert"><%= alert %></p>
 
 <%= render 'addform', member: @member %>
 
-<%= link_to 'Back', group_path(@group.id) %>
+<%= link_to 'Zurück', group_path(@group.id), class: "button small warning" %>

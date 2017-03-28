@@ -1,0 +1,17 @@
+<div class="top-bar">
+  <div class="top-bar-left">
+    <ul class="dropdown menu" data-dropdown-menu="x09k9p-dropdown-menu" role="menubar">
+      <li role="menuitem"><%= link_to 'Markmen', marksmen_path %></li>
+      <li role="menuitem" class="is-dropdown-submenu-parent opens-right" aria-haspopup="true" aria-label="Events" data-is-click="false" aria-expanded="false">
+        <a href="#">Events</a>
+        <ul class="menu submenu is-dropdown-submenu first-sub vertical" data-submenu="" role="menu" aria-hidden="true" style="">
+          <li role="menuitem" class="is-submenu-item is-dropdown-submenu-item"><%= link_to 'Events', events_path %></li>
+          <li role="menuitem" class="is-submenu-item is-dropdown-submenu-item"><%= link_to 'DB ueberpruefen', auswertung_path %></li>
+        </ul>
+      </li>
+      <li role="menuitem"><%= link_to 'Groups', groups_path %></li>
+      <li role="menuitem"><%= link_to 'Resume', resumes_path %></li>
+      <li role="menuitem"><%= link_to 'Auswertung', analysis_index_path %></li>
+    </ul>
+  </div>
+</div>

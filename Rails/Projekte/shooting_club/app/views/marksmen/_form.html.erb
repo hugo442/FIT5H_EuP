@@ -10,28 +10,38 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
+<div class="row">
+  <div class="medium-4 columns">
     <%= f.label :startnr %>
     <%= f.number_field :startnr %>
   </div>
 
-  <div class="field">
+  <div class="medium-12 columns">
+  </div>
+
+  <div class="medium-4 columns">
     <%= f.label :firstname %>
     <%= f.text_field :firstname %>
   </div>
 
-  <div class="field">
+  <div class="medium-12 columns">
+  </div>
+
+  <div class="medium-4 columns">
     <%= f.label :surname %>
     <%= f.text_field :surname %>
   </div>
 
-  <div class="field">
+  <div class="medium-12 columns">
+  </div>
+
+  <div class="medium-4 columns">
     <%= f.label :location %>
     <%= f.text_field :location %>
   </div>
 
-  <div class="actions">
-    <%= f.submit %>
+  <div class="actions medium-12 columns">
+    <%= f.submit 'Abschicken', class: "button primary" %>
   </div>
+</div>
 <% end %>
