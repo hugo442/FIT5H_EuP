@@ -8,13 +8,13 @@
     <%= button_to 'Neuer Schütze', new_marksman_path, method: :get, class: "button primary" %>
   </div>
   <div class="large-6 columns">
-    <div class="digg_pagination">
+    <div class="digg_pagination margin_allgemein">
       <%= will_paginate @marksmen, :container => false %>
     </div>
   </div>
   <div class="large-3 columns"></div>
 </div>
-
+<br>
 <table>
   <thead>
     <tr>

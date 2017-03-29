@@ -1,8 +1,9 @@
 <%= form_tag("/analysis/calculate", method: "get") do %>
-  
+  	<h6>Welche Datensätze?</h6>
 	<% cities_array = @events.map { |city| [city.name, city.name] } %>
 	<%= select_tag "eventname", options_for_select(cities_array) %>
 
+	<h6>Welches Verfahren?</h6>
 	<% method_array = @method.map { |city| [city, city] } %>
 	<%= select_tag "verfahren", options_for_select(method_array) %>
  <br><br> 

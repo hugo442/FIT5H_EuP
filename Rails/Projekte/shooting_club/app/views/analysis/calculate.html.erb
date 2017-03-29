@@ -22,9 +22,11 @@
         <td><%= event.marksmen %></td>
         <td><%= event.value %></td>
         <td><%= event.time_date.strftime("%d.%m.%Y %H:%M Uhr") %></td>
-        <td><%= link_to 'Show', event %></td>
-        <td><%= link_to 'Edit', edit_event_path(event) %></td>
-        <td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+          <%= link_to 'Details', event, class: "button small warning" %>
+          <%= link_to 'Edit', edit_event_path(event), class: "button small secondary" %>
+          <%= link_to 'Löschen', event, method: :delete, data: { confirm: 'Are you sure?' }, class: "button small alert" %>
+        </td>
       </tr>
     <% end %>
   </tbody>
