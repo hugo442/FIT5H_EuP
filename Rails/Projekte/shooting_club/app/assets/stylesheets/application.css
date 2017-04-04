@@ -16,6 +16,26 @@
  *= require foundation
  */
 
+.invisible {
+  display: none;
+}
+
+#search {
+  border-radius: 0;
+  box-sizing: border-box;
+  height: 2.6rem;
+  margin-bottom: 0px;
+}
+
+.anzeige {
+  margin-left: 1000px;
+  width: 200px;
+}
+
+.input-group {
+  width: 400px;
+}
+
  form {
   margin: 10px 0px 0px;
  }

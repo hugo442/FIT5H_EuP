@@ -3,52 +3,16 @@
 <h1>Schützentabelle</h1>
 <br><br>
 
-<div class="row">
-  <div class="large-3 columns">
-    <%= button_to 'Neuer Schütze', new_marksman_path, method: :get, class: "button primary" %>
+<%= form_tag marksmen_path, :method => 'get', :id => "marks_search" do %>
+
+  <div class="input-group anzeige">
+  <span class="input-group-label">Suche:</span>
+  <%= text_field_tag :search, params[:search], :class => "input-group-field" %>
+  <div class="input-group-button">
+    <%= submit_tag "Search", :name => nil, :class => "button invisible" %>
   </div>
-  <div class="large-6 columns">
-    <div class="digg_pagination margin_allgemein">
-      <%= will_paginate @marksmen, :container => false %>
-    </div>
-  </div>
-  <div class="large-3 columns"></div>
 </div>
+  <div id="marks"><%= render 'marks' %></div>
+<% end %>
 <br>
-<table>
-  <thead>
-    <tr>
-      <th><%= sortable "startnr", "Schützennummer" %></th>
-      <th><%= sortable "firstname", "Vorname" %></th>
-      <th><%= sortable "surname", "Nachname" %></th>
-      <th><%= sortable "location", "Ortschaft" %></th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @marksmen.each do |marksman| %>
-      <tr>
-        <td><%= marksman.startnr %></td>
-        <td><%= marksman.firstname %></td>
-        <td><%= marksman.surname %></td>
-        <td><%= marksman.location %></td>
-        <td>
-          <%= link_to 'Details', marksman, class: "button small warning" %>
-          <%= link_to 'Edit', edit_marksman_path(marksman), class: "button small secondary" %>
-          <%= link_to 'Löschen', marksman, method: :delete, data: { confirm: 'Are you sure?' }, class: "button small alert" %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<div class="digg_pagination">
-  <div class="page_info">
-    <%= page_entries_info @marksmen %>
-  </div>
 </div>
-
-
-<br><br>
-<br><br>

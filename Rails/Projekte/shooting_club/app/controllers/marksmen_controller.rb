@@ -5,9 +5,9 @@ class MarksmenController < ApplicationController
   # GET /marksmen.json
   def index
     if params[:sort] && params[:direction]
-      @marksmen = Marksman.order(params[:sort] + " " + params[:direction]).paginate(:per_page => 20, :page => params[:page])
+      @marksmen = Marksman.search(params[:search]).order(params[:sort] + " " + params[:direction]).paginate(:per_page => 20, :page => params[:page])
     else
-      @marksmen = Marksman.paginate(:per_page => 20, :page => params[:page])
+      @marksmen = Marksman.search(params[:search]).paginate(:per_page => 20, :page => params[:page])
     end
   end
 

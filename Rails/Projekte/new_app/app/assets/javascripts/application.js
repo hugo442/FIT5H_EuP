@@ -12,21 +12,5 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require foundation
-// require turbolinks
+//= require turbolinks
 //= require_tree .
-
-$(function(){ $(document).foundation(); });
-
-$(function() {
-  $(document).on("click", "#marks th a, #marks .digg_pagination a", function() {
-    $.getScript(this.href);
-    return false;
-  });
-  $("#marks_search input").keyup(function() {
-    $.get($("#marks_search").attr("action"), $("#marks_search").serialize(), null, "script");
-    return false;
-  });
-});
-
-
