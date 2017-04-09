@@ -7,6 +7,19 @@
   <p>Bitte passen sie die Schützen ID der fehlerhaften Einträge an, damit sie die Auswertung vortführen können!</p>
 </div>
 
+<div class="row">
+  <div class="large-3 columns">
+  </div>
+  <div class="large-6 columns">
+    <div class="digg_pagination margin_allgemein">
+      <%= will_paginate @marksmen, :container => false %>
+    </div>
+  </div>
+  <div class="large-3 columns">
+
+  </div>
+</div>
+<br>
 <table>
   <thead>
     <tr>
@@ -16,7 +29,7 @@
       <th></th>
       <th>Wert</th>
       <th>Zeitpunkt</th>
-      <th></th>
+      <th><%= link_to 'Alle Löschen', events_loeschen_path, method: :delete, data: { confirm: 'Willst du alle fehlerhaften Einträge löschen?' }, class: "button alert" %></th>
     </tr>
   </thead>
 
@@ -44,3 +57,9 @@
     <% end %>
   </tbody>
 </table>
+<br>
+<div class="digg_pagination">
+  <div class="page_info">
+    <%= page_entries_info @marksmen %>
+  </div>
+</div>

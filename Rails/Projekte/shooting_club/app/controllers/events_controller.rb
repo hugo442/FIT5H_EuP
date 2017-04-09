@@ -14,7 +14,7 @@ class EventsController < ApplicationController
   end
 
   def indexwrong
-    @events = Event.where( :marksmen => 0)
+    @events = Event.where( :marksmen => 0).paginate(:per_page => 20, :page => params[:page])
   end
   # GET /events/1
   # GET /events/1.json
@@ -69,6 +69,22 @@ class EventsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+def loeschenall
+    Event.delete_all
+    respond_to do |format|
+      format.html { redirect_to events_url, notice: 'Alle Einträge wurden erfolgreich gelöscht.' }
+      format.json { head :no_content }
+    end
+end
+
+def loeschen
+    Event.where(:marksmen => 0).delete_all
+    respond_to do |format|
+      format.html { redirect_to events_url, notice: 'Alle fehlerhaften Einträge wurden erfolgreich gelöscht.' }
+      format.json { head :no_content }
+    end
+end
 
   private
     # Use callbacks to share common setup or constraints between actions.

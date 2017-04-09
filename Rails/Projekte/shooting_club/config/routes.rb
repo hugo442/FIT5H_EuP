@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   get 'analysis/index'
   get 'analysis/select'
   get 'analysis/calculate'
+  delete 'events/loeschen'
+  delete 'events/loeschenall'
 
   	resources :groups do
   		get 'addnew' => 'groups#addnew'
