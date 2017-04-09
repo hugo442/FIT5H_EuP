@@ -13,23 +13,29 @@ class AnalysisController < ApplicationController
   	end
 
   	def calculate
-  		@eventsall = Event.where( :name => params[:eventname] )
+  		#@eventsall = Event.where( :name => params[:eventname] )
 
-      if params[:verfahren] == "Firmenpokal"
+      if params[:verfahren] == "3x3 Schuss"
+        @allgroupserg = []
+        groups = Group.all
+        groups.each do |group|
+          @marksman = MarksmanGroup.where(group_id: group.id)
+          @wertegruppe = []
+          @marksman.each do |marksmen|
+            @werte = []
+            if Event.where( :name => params[:eventname] && :marksmen => marksmen.startnr ).count == 3
+              @werte << Event.where( :name => params[:eventname] && :marksmen => marksmen.startnr )
+            elsif Event.where( :name => params[:eventname] && :marksmen => marksmen.startnr ).count == 1
+              @teiler << Event.where( :name => params[:eventname] && :marksmen => marksmen.startnr )
+            end
+          end
+        end
 
-      elsif params[:verfahren] == "Gästekönig"
+      elsif params[:verfahren] == "2x5 Schuss"
 
-      elsif params[:verfahren] == "Juniorenkönig"
+      elsif params[:verfahren] == "3 Schuss"
 
-      elsif params[:verfahren] == "Er und Sie"
-
-      elsif params[:verfahren] == "Adjudantenpokal"
-
-      elsif params[:verfahren] == "König der Könige"
-
-      elsif params[:verfahren] == "Juniorenpokal"
-
-      elsif params[:verfahren] == "Bestschütze"
+      elsif params[:verfahren] == "2x Teiler"
 
       end
           
@@ -39,6 +45,6 @@ class AnalysisController < ApplicationController
   	private
     # Use callbacks to share common setup or constraints between actions.
     def set_method
-      @method = [ "Firmenpokal", "Gästekönig", "Juniorenkönig", "Er und Sie", "Adjudantenpokal", "König der Könige", "Juniorenpokal", "Bestschütze", "leer" ]
+      @method = [ "3x3 Schuss", "2x5 Schuss", "3 Schuss", "2x Teiler" ]
     end
 end

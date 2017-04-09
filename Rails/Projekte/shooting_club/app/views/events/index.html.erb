@@ -18,6 +18,7 @@
       <th>Linie</th>
       <th>Schütze</th>
       <th>Wert</th>
+      <th>Teiler</th>
       <th>Zeitpunkt</th>
       <th colspan="3"></th>
     </tr>
@@ -30,6 +31,7 @@
         <td><%= event.shooting_range %></td>
         <td><%= event.marksmen %></td>
         <td><%= event.value %></td>
+        <td><%= event.unknown7 %></td>
         <td><%= event.time_date.strftime("%d.%m.%Y %H:%M Uhr") %></td>
         <td>
           <%= link_to 'Edit', edit_event_path(event), class: "button small secondary" %>

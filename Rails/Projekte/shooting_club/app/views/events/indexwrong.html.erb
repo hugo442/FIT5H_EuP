@@ -28,6 +28,7 @@
       <th>Schütze</th>
       <th></th>
       <th>Wert</th>
+      <th>Teiler</th>
       <th>Zeitpunkt</th>
       <th><%= link_to 'Alle Löschen', events_loeschen_path, method: :delete, data: { confirm: 'Willst du alle fehlerhaften Einträge löschen?' }, class: "button alert" %></th>
     </tr>
@@ -47,6 +48,7 @@
           <% end %>
         </td>
         <td><%= event.value %></td>
+        <td><%= event.unknown7 %></td>
         <td><%= event.time_date.strftime("%d.%m.%Y %H:%M:%S Uhr") %></td>
         <td>
           <%= link_to 'Details', event, class: "button small warning" %>
