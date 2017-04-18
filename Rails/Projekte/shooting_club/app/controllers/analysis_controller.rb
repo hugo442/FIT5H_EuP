@@ -20,14 +20,17 @@ class AnalysisController < ApplicationController
         groups = Group.all
         groups.each do |group|
           @marksman = MarksmanGroup.where(group_id: group.id)
-          @wertegruppe = []
-          @marksman.each do |marksmen|
-            @werte = []
-            if Event.where( :name => params[:eventname] && :marksmen => marksmen.startnr ).count == 3
-              @werte << Event.where( :name => params[:eventname] && :marksmen => marksmen.startnr )
-            elsif Event.where( :name => params[:eventname] && :marksmen => marksmen.startnr ).count == 1
-              @teiler << Event.where( :name => params[:eventname] && :marksmen => marksmen.startnr )
+          if @marksman.count >= 3
+            @wertegruppe = []
+            @marksman.each do |marksmen|
+              if Event.where( :name => params[:eventname], :marksmen => marksmen.startnr ).count == 3
+                @wertegruppe << Event.where( :name => params[:eventname], :marksmen => marksmen.startnr )
+              elsif Event.where( :name => params[:eventname], :marksmen => marksmen.startnr ).count == 1
+                @teiler << Event.where( :name => params[:eventname], :marksmen => marksmen.startnr )
+              end
             end
+          else
+            next
           end
         end
 
@@ -36,7 +39,17 @@ class AnalysisController < ApplicationController
       elsif params[:verfahren] == "3 Schuss"
 
       elsif params[:verfahren] == "2x Teiler"
-
+        @eventsall = []
+        allmarksman = Marksman.all
+        allmarksman.each do |marksmen|
+          if Event.where(:name => params[:eventname], :marksmen => marksmen.startnr).count > 0
+            @eventsall << Event.where(:name => params[:eventname], :marksmen => marksmen.startnr).order(:unknown7).first
+            @eventsall << Event.where(:name => params[:eventname], :marksmen => marksmen.startnr).order(:unknown7).second
+          else
+            next
+          end
+        end
+        @eventsall
       end
           
 
