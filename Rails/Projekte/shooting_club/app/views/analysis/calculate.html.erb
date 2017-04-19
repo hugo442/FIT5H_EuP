@@ -8,7 +8,8 @@
   </thead>
 
   <tbody>
-<% @eventsall.each do |satz| %>
-<% if satz.name %>
+  <%= debug @endsummen %>
+<% @endsummen.each do |k, v| %>
+<%= "Gruppe #{k} gewinnt mit #{v[0]} Punkten" %>
 <% end %>
   </tbody>
