@@ -1,12 +1,37 @@
 <thead>
-
+<div style="width: 800px;">
+  <% ranking = 1 %>
+  <% @endsummen.each do |k, v| %>
+    <% mark = @marksman.find{|s| s.startnr == k} %>
+    <h3 class="kaulichgreen"><%= "Platz ##{ranking}" %></h3>
+    <br>
+    <table>
+      <tr>
+        <th>Nr.</th>
+        <th>Vorname</th>
+        <th>Nachname</th>
+        <th>Wert 1</th>
+        <th>Wert 2</th>
+        <th>Teiler 1</th>
+        <th>Teiler 2</th>
+        <th>Gesamt</th>
+      </tr>
 </thead>
 
 <tbody>
-<% @endsummen.each do |k, v| %>
-<%= "Schuetze #{k} Gesamt #{v[0]}" %>
-<%= "Teiler 1 #{v[1].first.unknown7}" %>
-<%= "Teiler 2 #{v[1].last.unknown7}" %>
-<br>
-<% end %>
+      <tr class="kaulichleft">
+        <td><%= mark.startnr %></td>
+        <td><%= mark.firstname %></td>
+        <td><%= mark.surname %></td>
+        <td><%= v[1].first.value %></td>
+        <td><%= v[1].second.value %></td>
+        <td><%= v[1].first.unknown7 %></td>
+        <td><%= v[1].second.unknown7 %></td>
+        <td><%= v[0] %></td>
+      </tr>
+    </table>
+    <% ranking = ranking+1 %>
+    <br>
+  <% end %>
+</div>
 </tbody>

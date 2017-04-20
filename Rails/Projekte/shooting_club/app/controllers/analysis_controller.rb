@@ -13,7 +13,9 @@ class AnalysisController < ApplicationController
   	end
 
   	def calculate
-      if params[:verfahren] == "3x3 Schuss"
+      lala = nil
+      events = Event.where(:name => params[:eventname]).count
+      if params[:verfahren] == @method[0] && events > 0
         @endsummen = {}
         @mitglieder = {}
         @punkte = {}
@@ -43,13 +45,21 @@ class AnalysisController < ApplicationController
               @punkte[@marksmen1.startnr] = @wertarrayeinesschuetzen
             end
             @mitglieder[group.id] = @schuetzenprogruppe
-            @endsummen[group.id] = [@summe, @teiler.to_f]
+            @endsummen[group.id] = [@summe, @teiler]
           else
             next
           end
         end
-        @endsummen = Hash[@endsummen.sort_by{|k, v| [ v[0], 1/v[1] ]}.reverse]
-      elsif params[:verfahren] == "2x5 Schuss"
+        @endsummen.each do |k, v|
+          if v[0] == nil || v[1] == nil
+            params[:verfahren] = "error"
+            render 'index'
+            lala = 1
+            break
+          end
+        end
+        @endsummen = Hash[@endsummen.sort_by{|k, v| [ v[0], 1/v[1] ]}.reverse] if lala == nil
+      elsif params[:verfahren] == @method[1] && events > 0
         @endsummen = {}
         @mitglieder = {}
         @punkte = {}
@@ -79,33 +89,60 @@ class AnalysisController < ApplicationController
               @punkte[@marksmen1.startnr] = @wertarrayeinesschuetzen
             end
             @mitglieder[group.id] = @schuetzenprogruppe
-            @endsummen[group.id] = [@summe, @teiler.to_f]
+            @endsummen[group.id] = [@summe, @teiler]
           else
             next
           end
         end
-        @endsummen = Hash[@endsummen.sort_by{|k, v| [ v[0], 1/v[1] ]}.reverse]
-      elsif params[:verfahren] == "3 Schuss"
-
-      elsif params[:verfahren] == "2x Teiler"
+        @endsummen.each do |k, v|
+          if v[0] == nil || v[1] == nil
+            params[:verfahren] = "error"
+            render 'index'
+            lala = 1
+            break
+          end
+        end
+        @endsummen = Hash[@endsummen.sort_by{|k, v| [ v[0], 1/v[1] ]}.reverse] if lala == nil
+      elsif params[:verfahren] == @method[2] && events > 0
         @endsummen = {}
         @marksman = Marksman.all
         @marksman.each do |marksmen|
-          if Event.where(:name => params[:eventname], :marksmen => marksmen.startnr).count > 0
+          if Event.where(:name => params[:eventname], :marksmen => marksmen.startnr).count > 2
             @summe = 0
-            @beideteiler = Event.where(:name => params[:eventname], :marksmen => marksmen.startnr).order(:unknown7).last(2)
-            @beideteiler.each do |event|
-              @summe = @summe + event.unknown7.to_f
+            @dreiwerte = Event.where(:name => params[:eventname], :marksmen => marksmen.startnr).order(:time_date).first(3)
+            @dreiwerte.each do |event|
+              @summe = @summe + event.value.to_i
             end
           else
             next
           end
-          @endsummen[marksmen.startnr] = [@summe, @beideteiler]
+          if Event.where(:name => params[:eventname], :marksmen => marksmen.startnr).count > 3
+            @teiler = Event.where(:name => params[:eventname], :marksmen => marksmen.startnr).order(:time_date).last.unknown7
+          else
+            @teiler = 0.000001
+          end
+          @endsummen[marksmen.startnr] = [@summe, @teiler, @dreiwerte]
         end
-        @endsummen = Hash[@endsummen.sort_by{|k, v| v[0] }]
+        @endsummen = Hash[@endsummen.sort_by{|k, v| [ v[0], 1/v[1] ]}.reverse]
+      elsif params[:verfahren] == @method[3] && events > 0
+        @endsummen = {}
+        @marksman = Marksman.all
+        @marksman.each do |marksmen|
+          if Event.where(:name => params[:eventname], :marksmen => marksmen.startnr).count > 1
+            @summe = 0
+            @beideteiler = Event.where(:name => params[:eventname], :marksmen => marksmen.startnr).order(:unknown7).first(2)
+            @beideteiler.each do |event|
+              @summe = @summe + event.unknown7
+            end
+          else
+            next
+          end
+          @endsummen[marksmen.startnr] = [@summe.round(2), @beideteiler]
+          @endsummen = Hash[@endsummen.sort_by{|k, v| v[0] }]
+        end
+      else
+        params[:verfahren] = "error"
       end
-          
-
   	end
 
   	private

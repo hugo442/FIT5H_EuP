@@ -13,7 +13,7 @@ class CreateEvents < ActiveRecord::Migration[5.0]
       t.string :unknown4
       t.string :unknown5
       t.string :unknown6
-      t.string :unknown7
+      t.float :unknown7
       t.string :unknown8
       t.datetime :time_date
       t.string :unknown9

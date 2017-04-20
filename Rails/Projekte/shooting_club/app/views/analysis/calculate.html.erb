@@ -1,17 +1,17 @@
-<br>
-<h1>Gewinner</h1>
-
 <p id="notice"><%= notice %></p>
 
+<h1>Gewinner für <%= params[:eventname] %></h1>
+<h3>-Auswertungsverfahren: <%= params[:verfahren] %></h3>
+<br>
 
-<% if params[:verfahren] == "3x3 Schuss" %>
+<% if params[:verfahren] == @method[0] %>
   <%= render 'dreimaldrei' %>  
-<% elsif params[:verfahren] == "2x5 Schuss" %>
+<% elsif params[:verfahren] == @method[1] %>
   <%= render 'zweimalfuenf' %>
-<% elsif params[:verfahren] == "3 Schuss" %>
+<% elsif params[:verfahren] == @method[2] %>
   <%= render 'dreischuss' %>
-<% elsif params[:verfahren] == "2x Teiler" %>
+<% elsif params[:verfahren] == @method[3] %>
   <%= render 'zweiteiler' %>
 <% else %>
-<h4>FEHLER</h4>    
+  <h4>FEHLER</h4>    
 <% end %>
