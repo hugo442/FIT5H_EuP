@@ -1,0 +1,12 @@
+<thead>
+
+</thead>
+
+<tbody>
+<% @endsummen.each do |k, v| %>
+<%= "Schuetze #{k} Gesamt #{v[0]}" %>
+<%= "Teiler 1 #{v[1].first.unknown7}" %>
+<%= "Teiler 2 #{v[1].last.unknown7}" %>
+<br>
+<% end %>
+</tbody>

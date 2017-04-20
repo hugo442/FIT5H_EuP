@@ -32,7 +32,7 @@
         <td><%= event.marksmen %></td>
         <td><%= event.value %></td>
         <td><%= event.unknown7 %></td>
-        <td><%= event.time_date.strftime("%d.%m.%Y %H:%M Uhr") %></td>
+        <td><%= event.time_date.strftime("%d.%m.%Y %H:%M:%S Uhr") %></td>
         <td>
           <%= link_to 'Edit', edit_event_path(event), class: "button small secondary" %>
           <%= link_to 'Löschen', event, method: :delete, data: { confirm: 'Are you sure?' }, class: "button small alert" %>

@@ -1,15 +1,17 @@
+<br>
 <h1>Gewinner</h1>
 
 <p id="notice"><%= notice %></p>
 
 
-  <thead>
-
-  </thead>
-
-  <tbody>
-  <%= debug @endsummen %>
-<% @endsummen.each do |k, v| %>
-<%= "Gruppe #{k} gewinnt mit #{v[0]} Punkten" %>
+<% if params[:verfahren] == "3x3 Schuss" %>
+  <%= render 'dreimaldrei' %>  
+<% elsif params[:verfahren] == "2x5 Schuss" %>
+  <%= render 'zweimalfuenf' %>
+<% elsif params[:verfahren] == "3 Schuss" %>
+  <%= render 'dreischuss' %>
+<% elsif params[:verfahren] == "2x Teiler" %>
+  <%= render 'zweiteiler' %>
+<% else %>
+<h4>FEHLER</h4>    
 <% end %>
-  </tbody>

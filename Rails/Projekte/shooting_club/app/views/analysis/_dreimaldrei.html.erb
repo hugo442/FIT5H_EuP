@@ -1,0 +1,46 @@
+<thead>
+<div style="width: 800px;">
+  <% ranking = 1 %>
+  <% @endsummen.each do |k, v| %>
+    <h3 class="kaulichgreen"><%= "##{ranking} #{@groups.find{|s| s.id == k}.name}" %></h3>
+    <br>
+    <table>
+    <tr>
+      <th>Nr.</th>
+      <th>Vorname</th>
+      <th>Nachname</th>
+      <th>Wert 1</th>
+      <th>Wert 2</th>
+      <th>Wert 3</th>
+      <th>Gesamt</th>
+    </tr>
+</thead>
+
+<tbody>
+      <% @mitglieder[k].each do |mitglied| %>
+        <% if @punkte[mitglied.startnr].count == 3 %>
+          <tr class="kaulichleft">
+          <td><%= mitglied.startnr %></td>
+          <td><%= mitglied.firstname %></td>
+          <td><%= mitglied.surname %></td>
+          <% schuetze = 0 %>
+          <% @punkte[mitglied.startnr].each do |wert| %>
+            <% schuetze = schuetze+wert %>
+            <td><%= wert %></td>
+          <% end %>
+          <td><%= schuetze %></td>
+        <% else %>
+          <tr class="kaulichleft kaulicherg">
+          <td><h4><%= mitglied.startnr  %></h4></td>
+          <td colspan="2"><h4>Teiler / Gruppegesamt:</h4></td>
+          <td colspan="3"><h4><%= v[1] %></h4></td>
+          <td><h4><%= v[0] %></h4></td>
+        <% end %>
+        </tr>
+      <% end %>
+    </table>
+    <% ranking = ranking+1 %>
+  <br>
+  <% end %>
+</div>
+</tbody>

@@ -16,6 +16,18 @@
  *= require foundation
  */
 
+.kaulichgreen {
+  color: green;
+}
+
+.kaulicherg {
+  color: red;
+}
+
+.kaulichleft {
+  text-align: center;
+}
+
 .invisible {
   display: none;
 }
