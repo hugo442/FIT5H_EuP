@@ -14,7 +14,7 @@
   <h4>Mitglieder:</h4>
   	<ul>
 	  <% @list.each do |c| %>
-	  	<li><%= "#{c.firstname} #{c.surname}" %></li>
+	  	<li><%= "#{c.firstname} #{c.surname}" %> <%= link_to 'Löschen', group_deletem_path(@group.id, c.id), method: :delete, class: 'button alert' %></li>
 	  <% end %>	
 	</ul>
 </p>

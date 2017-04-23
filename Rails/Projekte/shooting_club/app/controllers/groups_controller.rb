@@ -17,6 +17,11 @@ class GroupsController < ApplicationController
     end
   end
 
+  def deletem
+    MarksmanGroup.find_by(marksman_id: params[:format].to_i, group_id: params[:group_id].to_i).destroy
+    redirect_to group_url(params[:group_id]), notice: 'Der Member ist nicht mehr in der Gruppe.'
+  end
+
   def addnew
     @member = MarksmanGroup.new
     @member.group_id = params[:group_id]

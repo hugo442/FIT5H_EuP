@@ -53,7 +53,7 @@ class AnalysisController < ApplicationController
         @endsummen.each do |k, v|
           if v[0] == nil || v[1] == nil
             params[:verfahren] = "error"
-            render 'index'
+            redirect_to analysis_index_path, notice: 'Fehler bei der Auswahl des Verfahrens.'
             lala = 1
             break
           end
@@ -97,7 +97,7 @@ class AnalysisController < ApplicationController
         @endsummen.each do |k, v|
           if v[0] == nil || v[1] == nil
             params[:verfahren] = "error"
-            render 'index'
+            redirect_to analysis_index_path, notice: 'Fehler bei der Auswahl des Verfahrens.'
             lala = 1
             break
           end
