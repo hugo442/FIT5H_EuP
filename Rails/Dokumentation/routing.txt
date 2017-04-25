@@ -6,7 +6,7 @@ BASISURL
 
 Recoursen
 	recources :events
-		Mit der Funktion resources und dem Namen eines Controller als Symbol, wird beim STart des Servers gesochert, dass ein Aufruf von:
+		Mit der Funktion resources und dem Namen eines Controller als Symbol, wird beim Start des Servers gesichert, dass ein Aufruf von:
 			http://localhost:3000/events
 		bei index-Action des Events-Controllers landet
 
